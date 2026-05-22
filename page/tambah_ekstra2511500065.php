@@ -1,53 +1,43 @@
 <?php
-include "koneksi.php";
-// atau
-require_once "config/koneksi.php";
+require_once("config/koneksi.php");
 ?>
 
 <div class="content-header">
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0 text-dark">Data Siswa</h1>
+                <h1 class="m-0 text-dark">Data Ekstrakulikuler</h1>
             </div>
         </div>
     </div>
 </div>
 <?php
 //kode otomatis
-$carikode = mysqli_query($koneksi,"select max(id_kelas) from siswa") or die (mysqli_error($koneksi));
+$carikode = mysqli_query($koneksi,"select max(id_ekstra065) from ekstra_2511500065") or die (mysqli_error($koneksi));
 $datakode = mysqli_fetch_array($carikode);
 if($datakode) {
     $nilaikode = substr($datakode[0], 2);
     $kode = (int) $nilaikode;
     $kode = $kode + 1;
-    $hasilkode ="K-".str_pad($kode, 3, "0", STR_PAD_LEFT);
-} else {$hasilkode="K-"; }
+    $hasilkode ="M-".str_pad($kode, 3, "0", STR_PAD_LEFT);
+} else {$hasilkode="M-"; }
 $_SESSION["KODE"] = $hasilkode;
 
 if(isset($_POST['tambah'])){
-    $nis = $_POST['nis'];
-    $nm_siswa = $_POST['nm_siswa'];
-    $jenkel = $_POST['jenkel'];
-    $hp = $_POST['hp'];
-    $id_kelas = $_POST['id_kelas'];
+    $id_ekstra065 = $_POST['id_ekstra065'];
+    $nama_ekstra065 = $_POST['nama_ekstra065'];
+    $ket065 = $_POST['ket065'];
+    $semester065 = $_POST['semester065'];
+    $thn_ajaran065 = $_POST['thn_ajaran065'];
 
-    $insert = mysqli_query($koneksi,"INSERT INTO siswa values ('$nis', '$nm_siswa','$jenkel','$hp','$id_kelas')");
-    
+    $insert = mysqli_query($koneksi,"INSERT INTO ekstra_2511500065 values ('$id_ekstra065', '$nama_ekstra065','$ket065','$semester065','$thn_ajaran065')");
     if ($insert) {
-        $username = $nis;
-        $password = '1234';
-        $role = 'siswa';
-
-    mysqli_query($koneksi, "INSERT INTO user (username, password, role) 
-    VALUES ('$username', '$password', '$role')");
-
         echo '<div class="alert alert-info-dismissible">
         <button type="button" class="close" data-dismiss="alert"
             aria-hidden="true">x</button>
         <h5><i class="icon fas fa-info"></i> Info </h5>
         <h4>Berhasil Disimpan</h4></div>';
-        echo '<meta http-equiv="refresh" contents="1;url=index.php?page=siswa">';
+        echo '<meta http-equiv="refresh" contents="1;url=index.php?page=ekstra2511500065">';
     }else{
         echo 'div class="alert alert-warning alert-dismissible">
         <button type="button" class="close" data-dismiss="alert"
@@ -64,24 +54,24 @@ if(isset($_POST['tambah'])){
                     <div class="card-body p-2">
                         <form method="POST" action="">
                             <div class="form-group">
-                                <label for="nis">NIS</label>
-                                <input type="text" name="nis" id="nis" placeholder="NIS" class="form-control">
+                                <label for="id_ekstra065">Kode Ekstrakulikuler</label>
+                                <input type="text"name="id_ekstra065" value="<?= $hasilkode; ?>" placeholder="Id eskul" class="form-control" readonly>
                             </div>
                             <div class="form-group">
-                                <label for="nm_siswa">Nama Siswa</label>
-                                <input type="text" name="nm_siswa" id="nm_siswa" placeholder="Nama Siswa" class="form-control">
+                                <label for="nama_ekstra065">Nama Ekstrakulikuler</label>
+                                <input type="text" name="nama_ekstra065" id="nama_ekstra065" placeholder="Nama Ekstrakulikuler" class="form-control">
                             </div>
                             <div class="form-group">
-                                <label for="jenkel">jenkel</label>
-                                <input type="text" name="jenkel" id="jenkel" placeholder="Jenkel" class="form-control">
+                                <label for="Ket065">Keterangan</label>
+                                <input type="text" name="Ket065" id="Ket065" placeholder="Keterangan" class="form-control">
                             </div>
                              <div class="form-group">
-                                <label for="hp">No Hp</label>
-                                <input type="text" name="hp" id="hp" placeholder="hp" class="form-control">
+                                <label for="semester065">Semester</label>
+                                <input type="text" name="semester065" id="semester065" placeholder="Semester" class="form-control">
                             </div>
-                             <div class="form-group">
-                                <label for="id_kelas">Kd Kelas</label>
-                                <input type="text"name="id_kelas" value="<?= $hasilkode; ?>" placeholder="id_kelas" class="form-control" readonly>
+                            <div class="form-group">
+                                <label for="thn_ajaran065">Tahun AJaran</label>
+                                <input type="text" name="thn_ajaran065" id="thn_ajaran065" placeholder="Tahun Ajaran" class="form-control">
                             </div>
                             <div class="card-footer">
                                 <input type="submit" class="btn btn-primary" name="tambah" value="simpan">
