@@ -1,3 +1,7 @@
+<?php
+require_once "config/koneksi.php";
+?>
+
 <div class="content-header">
     <div class="container-fluid">
         <div class="row mb-2">
@@ -39,7 +43,9 @@ if(isset($_GET['action'])) {
                         <th>Pendidikan Terakhir</th>
                         <th>No Hp</th>
                         <th>Alamat</th>
+                        <?php if($_SESSION['role'] == 'admin') { ?>
                         <th>Aksi</th>
+                        <?php } ?>
                     </tr>
                 </tread>
                 <?php
@@ -57,6 +63,7 @@ if(isset($_GET['action'])) {
                         <td><?= $result['pend_terakhir']; ?></td>
                         <td><?= $result['hp']; ?></td>
                         <td><?= $result['alamat']; ?></td>
+                        <?php if($_SESSION['role'] == 'admin') { ?>
                         <td>
                             <a href="index.php?page=guru&action=hapus&kd=<?= $result['kd_guru']
                              ?>" title="">
@@ -65,6 +72,7 @@ if(isset($_GET['action'])) {
                             =""><span class
                                 ="badge badge-warning">Edit</span></a>
                         </td>
+                            <?php } ?>
                     </tr>
                 </tbody>
                 <?php } ?>

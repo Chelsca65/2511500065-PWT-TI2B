@@ -1,3 +1,7 @@
+<?php
+require_once "config/koneksi.php";
+?>
+
 <div class="content-header">
     <div class="container-fluid">
         <div class="row mb-2">
@@ -34,13 +38,18 @@ if(isset($_GET['action'])) {
                         <th>No</th>
                         <th>Kd Mapel</th>
                         <th>Nama Mapel</th>
+                        <th>Guru Pengampu</th>
                         <th>KKM</th>
                         <th>Aksi</th>
                     </tr>
                 </tread>
                 <?php
                 $no = 0;
-                $query = mysqli_query($koneksi, "SELECT * FROM mapel");
+                $query = mysqli_query($koneksi,"
+                SELECT mapel.*, guru.nm_guru
+                FROM mapel
+                LEFT JOIN guru ON mapel.kd_guru = guru.kd_guru
+                ");
                 while ($result = mysqli_fetch_array($query)) {
                     $no++;
                 ?>
@@ -49,6 +58,7 @@ if(isset($_GET['action'])) {
                         <td><?= $no; ?></td>
                         <td><?= $result['kd_mapel']; ?></td>
                         <td><?= $result['nm_mapel']; ?></td>
+                        <td><?= $result['nm_guru']; ?></td>
                         <td><?= $result['kkm']; ?></td>
                         <td>
                             <a href="index.php?page=mapel&action=hapus&kd=<?= $result['kd_mapel']

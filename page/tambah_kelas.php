@@ -1,9 +1,6 @@
 <?php
-include "koneksi.php";
-// atau
-require_once "config/koneksi.php";
+require_once("config/koneksi.php");
 ?>
-
 
 <div class="content-header">
     <div class="container-fluid">

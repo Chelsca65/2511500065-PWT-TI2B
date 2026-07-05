@@ -62,8 +62,8 @@ if(isset($_POST['tambah'])){
                                 <input type="text" name="nama_ekstra065" id="nama_ekstra065" placeholder="Nama Ekstrakulikuler" class="form-control">
                             </div>
                             <div class="form-group">
-                                <label for="Ket065">Keterangan</label>
-                                <input type="text" name="Ket065" id="Ket065" placeholder="Keterangan" class="form-control">
+                                <label for="ket065">Keterangan</label>
+                                <input type="text" name="ket065" id="ket065" placeholder="Keterangan" class="form-control">
                             </div>
                              <div class="form-group">
                                 <label for="semester065">Semester</label>

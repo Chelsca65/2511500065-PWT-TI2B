@@ -1,3 +1,7 @@
+<?php
+require_once "config/koneksi.php";
+?>
+
 <div class="content-header">
     <div class="container-fluid">
         <div class="row mb-2">
@@ -6,60 +10,81 @@
             </div>
         </div>
     </div>
-</div> 
+</div>
 
 <?php
 $kd = $_GET['kd'];
-$edit = mysqli_fetch_array(mysqli_query($koneksi,"SELECT * FROM mapel WHERE kd_mapel='$kd' "));
+$edit = mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM mapel WHERE kd_mapel='$kd' "));
 
-if(isset($_POST['tambah'])){
+if (isset($_POST['tambah'])) {
     $kd_mapel = $_POST['kd_mapel'];
     $nm_mapel = $_POST['nm_mapel'];
+    $kd_guru = $_POST['kd_guru'];
     $kkm = $_POST['kkm'];
 
-    $insert = mysqli_query($koneksi,"UPDATE mapel SET nm_mapel='$nm_mapel', kkm='$kkm' WHERE kd_mapel='$kd_mapel' ");
-     if ($insert) {
+    $insert = mysqli_query($koneksi, "UPDATE mapel SET nm_mapel='$nm_mapel' ,kd_guru= '$kd_guru', kkm='$kkm' WHERE kd_mapel='$kd_mapel' ");
+    if ($insert) {
         echo '<div class="alert alert-info-dismissible">
         <button type="button" class="close" data-dismiss="alert"
             aria-hidden="true">x</button>
         <h5><i class="icon fas fa-info"></i> Info </h5>
         <h4>Berhasil Disimpan</h4></div>';
         echo '<meta http-equiv="refresh" contents="1;url=index.php?page=mapel">';
-    }else{
+    } else {
         echo 'div class="alert alert-warning alert-dismissible">
         <button type="button" class="close" data-dismiss="alert"
             aria-hidden="true">x</button>
         <h5><i class="icon fas fa-info"></i> Info </h5>
         <h4>Gagal Disimpan</h4></div>';
-        }
     }
-    ?>
+}
+?>
 
-    <section class="content">
-        <div class="container-fluid">
-            <div class="card">
-                <div class="card-body">
-                    <div class="card-body p-2">
-                        <form method="POST" action="">
-                            <div class="form-group">
-                                <label for="kd_mapel">Kode Mapel</label>
-                                <input type="text"name="kd_mapel" value="<?= $edit['kd_mapel']; ?>" placeholder="Id Kat" class="form-control" readonly>
-                            </div>
-                            <div class="form-group">
-                                <label for="nm_mapel">Nama Mapel</label>
-                                <input type="text" name="nm_mapel" id="nm_mapel" value="<?= $edit['nm_mapel']; ?>" placeholder="Nama Mapel" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label for="kkm">KKM</label>
-                                <input type="text" name="kkm" id="nm_mapel" value="<?= $edit['kkm']; ?>" placeholder="KKM" class="form-control">
-                            </div>
-                            <div class="card-footer">
-                                <input type="submit" class="btn btn-primary" name="tambah" value="simpan">
-                            </div>
-                        </form>
-                    </div>
+<section class="content">
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-body">
+                <div class="card-body p-2">
+                    <form method="POST" action="">
+                        <div class="form-group">
+                            <label for="kd_mapel">Kode Mapel</label>
+                            <input type="text" name="kd_mapel" value="<?= $edit['kd_mapel']; ?>" placeholder="Id Kat" class="form-control" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="nm_mapel">Nama Mapel</label>
+                            <input type="text" name="nm_mapel" id="nm_mapel" value="<?= $edit['nm_mapel']; ?>" placeholder="Nama Mapel" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>Guru Pengampu</label>
+                            <select name="kd_guru" class="form-control">
+                                <option value="">-- Pilih Guru --</option>
+
+                                <?php
+                                $guru = mysqli_query($koneksi, "SELECT * FROM guru");
+                                while ($g = mysqli_fetch_array($guru)) {
+
+                                    if ($g['kd_guru'] == $edit['kd_guru']) {
+                                        $pilih = "selected";
+                                    } else {
+                                        $pilih = "";
+                                    }
+                                ?>
+                                    <option value="<?= $g['kd_guru']; ?>" <?= $pilih; ?>>
+                                        <?= $g['nm_guru']; ?>
+                                    </option>
+                                <?php } ?>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="kkm">KKM</label>
+                            <input type="text" name="kkm" id="nm_mapel" value="<?= $edit['kkm']; ?>" placeholder="KKM" class="form-control">
+                        </div>
+                        <div class="card-footer">
+                            <input type="submit" class="btn btn-primary" name="tambah" value="simpan">
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
+    </div>
 </section>
-

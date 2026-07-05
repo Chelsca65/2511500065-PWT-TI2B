@@ -170,65 +170,101 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <?php } ?>
 
               <?php if ($_SESSION['role'] == 'guru') { ?>
-                <li class="nav-item">
+                 <li class="nav-item">
                   <a href="#" class="nav-link active">
                     <i class="nav-icon fas fa-tachometer-alt"></i>
                     <p>
-                      Profil
+                      Dashboard Guru
                       <i class="right fas fa-angle-left"></i>
                     </p>
                   </a>
+                  <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                      <a href="index.php?page=guru" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Data Guru</p>
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a href="index.php?page=siswa" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Data Siswa</p>
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a href="index.php?page=jadwal_guru" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Jadwal Guru</p>
+                      </a>
+                    </li>
+                  </ul>
+                 </li>
 
                 <li class="nav-item">
                   <a href="#" class="nav-link active">
                     <i class="nav-icon fas fa-tachometer-alt"></i>
                     <p>
-                      Jadwal Guru
+                      Password
                       <i class="right fas fa-angle-left"></i>
                     </p>
                   </a>
-
-                <li class="nav-item">
-                  <a href="index.php?page=ganti_password" class="nav-link">
-                    <i class="nav-icon fas fa-tachometer-alt"></i>
-                    <p>
-                      Ganti Password
-                      <i class="right fas fa-angle-left"></i>
-                    </p>
-                  </a>
+                  <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                      <a href="index.php?page=ganti_password" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Ganti Password</p>
+                      </a>
+                    </li>
+                  </ul>
+                 </li>
                 <?php } ?>
 
                 <?php if ($_SESSION['role'] == 'siswa') { ?>
-                <li class="nav-item">
+                 <li class="nav-item">
                   <a href="#" class="nav-link active">
                     <i class="nav-icon fas fa-tachometer-alt"></i>
                     <p>
-                      Profil
+                      Dashboard Siswa
                       <i class="right fas fa-angle-left"></i>
                     </p>
                   </a>
-
-                <li class="nav-item">
-                  <a href="#" class="nav-link active">
-                    <i class="nav-icon fas fa-tachometer-alt"></i>
-                    <p>
-                      Jadwal Kelas
-                      <i class="right fas fa-angle-left"></i>
-                    </p>
-                  </a>
+                  <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                      <a href="index.php?page=jadwal_siswa" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Jadwal Kelas</p>
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a href="index.php?page=guru" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Data Guru</p>
+                      </a>
+                    </li>
+                  </ul>
+                 </li>
                   
                   <li class="nav-item">
                   <a href="#" class="nav-link active">
                     <i class="nav-icon fas fa-tachometer-alt"></i>
                     <p>
-                      Ganti Password
+                      Password
                       <i class="right fas fa-angle-left"></i>
                     </p>
                   </a>
+                  <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                      <a href="index.php?page=ganti_password" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Ganti Password</p>
+                      </a>
+                    </li>
+                  </ul>
+                </li>
                 <?php } ?>
 
                 <li class="nav-item">
-                  <a href="#" class="nav-link">
+                  <a href="logout.php" class="nav-link">
                     <i class="nav-icon fas fa-th"></i>
                     <p>
                       Log Out
@@ -269,7 +305,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <div class="col-lg-12">
                 <div class="card">
                   <div class="card-body">
-                    <h5 class="card-title">Dashboard</h5>
 
                     <p class="card-text">
                     <?php 

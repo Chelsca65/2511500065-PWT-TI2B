@@ -87,6 +87,8 @@ if (isset($_POST['login'])) {
     if ($data) {
       $_SESSION['username'] = $data['username'];
       $_SESSION['role'] = $data['role'];
+      $_SESSION['id_kelas'] = $data['id_kelas']; 
+      $_SESSION['kd_guru'] = $data['kd_guru']; 
 
       header("Location: index.php");
     } else {

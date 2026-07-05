@@ -1,3 +1,7 @@
+<?php
+require_once "config/koneksi.php";
+?>
+
 <div class="content-header">
     <div class="container-fluid">
         <div class="row mb-2">
@@ -12,12 +16,12 @@
 if(isset($_GET['action'])) {
     if($_GET['action'] == "hapus") {
         $kd =$_GET['kd'];
-        $query = mysqli_query($koneksi, "DELETE FROM siswa where id_kelas = '$kd' ");
+        $query = mysqli_query($koneksi, "DELETE FROM siswa where nis = '$kd' ");
         if ($query){
             echo '
             <div class="alert alert-warning alert-dismissible">
             Berhasil Di Hapus</div>';
-            echo '<meta http-equiv="refresh" content=1;url=index.php?page=siswa">';
+            echo '<meta http-equiv="refresh" content=1;url=index.php?page=siswa>';
         }
     }
 }
@@ -34,15 +38,21 @@ if(isset($_GET['action'])) {
                         <th>No</th>
                         <th>NIS</th>
                         <th>Nama Siswa</th>
+                        <th>Kelas</th>
                         <th>Jenis Kelamin</th>
                         <th>No Hp</th>
-                        <th>Kd Kelas</th>
+                        <?php if($_SESSION['role'] == 'admin') { ?>
                         <th>Aksi</th>
+                        <?php } ?>
                     </tr>
                 </tread>
                 <?php
                 $no = 0;
-                $query = mysqli_query($koneksi, "SELECT * FROM siswa");
+                $query = mysqli_query($koneksi, "
+                SELECT siswa.*, kelas.nm_kelas
+                FROM siswa, kelas
+                WHERE siswa.id_kelas = kelas.id_kelas
+                ");
                 while ($result = mysqli_fetch_array($query)) {
                     $no++;
                 ?>
@@ -51,17 +61,19 @@ if(isset($_GET['action'])) {
                         <td><?= $no; ?></td>
                         <td><?= $result['nis']; ?></td>
                         <td><?= $result['nm_siswa']; ?></td>
+                        <td><?= $result['nm_kelas']; ?></td>
                         <td><?= $result['jenkel']; ?></td>
                         <td><?= $result['hp']; ?></td>
-                        <td><?= $result['id_kelas']; ?></td>
+                        <?php if($_SESSION['role'] == 'admin') { ?>
                         <td>
-                            <a href="index.php?page=siswa&action=hapus&kd=<?= $result['id_kelas']
+                            <a href="index.php?page=siswa&action=hapus&kd=<?= $result['nis']
                              ?>" title="">
                                 <span class="badge badge-danger">Hapus</span></a>
-                            <a href="index.php?page=edit_siswa&kd=<?= $result['id_kelas'] ?>" title
+                            <a href="index.php?page=edit_siswa&kd=<?= $result['nis'] ?>" title
                             =""><span class
                                 ="badge badge-warning">Edit</span></a>
                         </td>
+                        <?php } ?>
                     </tr>
                 </tbody>
                 <?php } ?>
